@@ -1,4 +1,5 @@
 import React from "react";
+import { TooltipData } from "../testData/tooltip-data";
 import { FaHtml5, FaCss3, FaSmile } from "react-icons/fa";
 import {
   SiJavascript,
@@ -11,6 +12,7 @@ import {
   SiFigma,
 } from "react-icons/si";
 import { RiBook2Fill, RiTeamFill } from "react-icons/ri";
+import { TiPlus } from "react-icons/ti";
 import styled from "styled-components";
 import { HorizontalLine, VerticalLine } from "./decoration/Deco";
 import { Hexagon } from "./hexagons/Hexagons";
@@ -29,42 +31,11 @@ const HexagonsGrid = styled.div`
   position: relative;
 `;
 
-const TooltipData = [
-  [
-    "html",
-    "HTML5. Hypertext mark up language. Used to build the visual infrastructure.",
-  ],
-  ["css", "CSS3. Styling language."],
-  ["js", "Javascript. The main languag for web programming."],
-  ["react", "React. Used to build the app's visual side and interactivity."],
-  ["gatsby", "Gatsby. Used to build fast server side rendered pages."],
-  [
-    "styled-components",
-    "Styled Components. Allows you to write CSS inside Javascript files.",
-  ],
-  [
-    "tailwind",
-    "TailwindCSS. Gives you some pre-made customizable UI components.",
-  ],
-  ["git", "Git. Version manager tool."],
-  ["github", "Github. Massive online repostory."],
-  ["figma", "Figma. Frontend design tool."],
-  [
-    "group",
-    "I like working in groups. It's useful to exchange ideas and grow as a professional.",
-  ],
-  [
-    "selftaught",
-    "I'm a self-taught person. I've learning web development by my own for almost 2 years.",
-  ],
-  ["respect", "I'm very quiet, kind and generous person."],
-];
-
 const Skills = () => {
   return (
     <>
       {TooltipData.map((data) => (
-        <ReactTooltip id={data[0]}>
+        <ReactTooltip key={data[0]} id={data[0]}>
           <span>{data[1]}</span>
         </ReactTooltip>
       ))}
@@ -128,13 +99,20 @@ const Skills = () => {
         />
 
         <Node
-          data-tip="hola"
           icon={<SiTailwindcss />}
           before={<VerticalLine />}
           col="3/4"
           row="3/4"
           direction="column"
           id="tailwind"
+        />
+        <Node
+          icon={<TiPlus />}
+          before={<VerticalLine />}
+          col="3/4"
+          row="4/5"
+          direction="column"
+          id="morelibs"
         />
         {/* TOOLS */}
         <H2

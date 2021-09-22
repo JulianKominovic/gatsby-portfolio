@@ -1,7 +1,7 @@
-import { ExternalLink, InternalLink } from "./links/Links";
+import { ExternalLink } from "./links/Links";
 import styled, { ThemeContext } from "styled-components";
 import React, { useContext } from "react";
-import { H2, Text, Highlight } from "./text/Text";
+import { H2, Text } from "./text/Text";
 import { Badge } from "./badges/Badges";
 
 const CardContainer = styled.article`

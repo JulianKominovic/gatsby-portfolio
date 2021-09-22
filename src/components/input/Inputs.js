@@ -27,4 +27,18 @@ const TextArea = styled.textarea`
   font-size: 20px;
 `;
 
-export { InputText, Label, TextArea };
+const Error = styled.p`
+  display: block;
+  background-color: rgb(130, 0, 0);
+  color: red;
+  width: max-content;
+`;
+
+const Success = styled.p`
+  display: block;
+  background-color: rgb(0, 130, 0);
+  color: green;
+  width: max-content;
+`;
+
+export { InputText, Label, TextArea, Error, Success };

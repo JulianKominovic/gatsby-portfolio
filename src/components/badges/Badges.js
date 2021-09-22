@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Badge = styled.div`
-  display: inline;
+  display: ${(props) => props.display || "inline"};
   padding: 0 4px;
   border-radius: 6px;
   font-size: 14px;

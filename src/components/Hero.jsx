@@ -1,9 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { NormalButton } from "./buttons/Buttons";
-import { HeroText, Highlight } from "./text/Text";
-import { FaGithub, FaLinkedin, FaDev } from "react-icons/fa";
-import { BackgroundImage, Background } from "./decoration/Deco";
+import { HeroText } from "./text/Text";
+import { BackgroundImage } from "./decoration/Deco";
 
 const Container = styled.div`
   height: 100vh;
