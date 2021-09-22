@@ -3,5 +3,12 @@ module.exports = {
     siteUrl: "https://www.yourdomain.tld",
     title: "Julian Kominovic Portfolio",
   },
-  plugins: [],
+  plugins: [
+    {
+      resolve: "gatsby-plugin-anchor-links",
+      options: {
+        offset: 0,
+      },
+    },
+  ],
 };
