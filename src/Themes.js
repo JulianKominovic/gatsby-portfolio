@@ -9,6 +9,7 @@ const THEMES = {
     text: "#ffffff",
     buttonBg: "#454649",
     navbar: "#333",
+    globalBg: "#b980f0",
   },
   dark: {
     bg: "#080609",
@@ -16,6 +17,7 @@ const THEMES = {
     text: "#ffffff",
     buttonBg: "#aaa",
     navbar: "#000",
+    globalBg: "#000351",
   },
 };
 

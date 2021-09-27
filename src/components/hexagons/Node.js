@@ -7,6 +7,7 @@ const NodeShape = styled.div`
   position: relative;
   cursor: pointer;
   height: 116px;
+
   & > svg {
     position: absolute;
     top: 50%;

@@ -4,7 +4,7 @@ import ProjectCard from "./ProjectCard";
 import { cardsData } from "../testData/test-cards";
 import SectionOverlay from "./SectionOverlay";
 
-const ProjectsContainer = styled.div`
+const ProjectsContainer = styled.section`
   width: 100%;
   padding: 200px 160px;
   min-height: 100vh;
@@ -14,6 +14,10 @@ const ProjectsContainer = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+
+  @media screen and (max-width: 815px) {
+    padding: 200px 20px;
+  }
 `;
 
 const Projects = () => {

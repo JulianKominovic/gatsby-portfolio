@@ -33,6 +33,10 @@ const InternalLink = styled(AnchorLink)`
     transition: left 0.5s ease;
     left: 0%;
   }
+
+  @media screen and (max-width: 440px) {
+    font-size: 14px;
+  }
 `;
 
 export { ExternalLink, InternalLink };

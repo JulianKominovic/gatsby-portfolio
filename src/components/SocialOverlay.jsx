@@ -4,7 +4,7 @@ import { VerticalLine } from "./decoration/Deco";
 import { FaGithub, FaLinkedin, FaDev } from "react-icons/fa";
 import { ExternalLink } from "./links/Links";
 
-const OverlayContainer = styled.div`
+const OverlayContainer = styled.aside`
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -14,12 +14,16 @@ const OverlayContainer = styled.div`
   z-index: 999;
   bottom: 0;
   right: 60px;
+
+  @media screen and (max-width: 815px) {
+    display: none;
+  }
 `;
 
 const SocialOverlay = () => {
   const colors = useContext(ThemeContext);
   return (
-    <OverlayContainer>
+    <OverlayContainer id="social-overlay">
       <ExternalLink
         theme={colors}
         href="https://dev.to/juliankominovic"

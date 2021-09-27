@@ -27,8 +27,9 @@ const BackgroundImage = styled.img.attrs((props) => ({
   ${(props) =>
     typeof props.bottomDinamic != typeof undefined
       ? "bottom:" + props.bottomDinamic + ";"
-      : "top: " + props.topDinamic || 0 + ";"}
-  opacity: ${(props) => props.opacity || 0.6};
+      : "top: " + props.topDinamic + ";" || "0;"}
+  opacity: ${(props) => props.opacity || "0.6;"};
+  transform: rotate(${(props) => props.rotate});
 `;
 
 const Background = styled.div`
@@ -38,7 +39,7 @@ const Background = styled.div`
   top: 0;
   left: 0;
   z-index: ${(props) => props.zIndex || 0};
-  background-color: ${(props) => props.theme.navbar};
+  background-color: ${(props) => props.theme.globalBg};
 `;
 
 export { VerticalLine, HorizontalLine, BackgroundImage, Background };

@@ -3,14 +3,17 @@ import styled, { ThemeContext } from "styled-components";
 import { HeroText } from "./text/Text";
 import { BackgroundImage } from "./decoration/Deco";
 
-const Container = styled.div`
+const Container = styled.header`
   height: 100vh;
   position: relative;
   overflow: hidden;
-  padding: 250px 100px;
+  padding: 250px 0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  @media screen and (max-width: 815px) {
+    padding: 0;
+  }
 `;
 
 const Hero = () => {
@@ -30,7 +33,8 @@ const Hero = () => {
         bottom="0"
         position="absolute"
         src="/img/frontwave.svg"
-        zIndex="1"
+        zIndex="2"
+        opacity="1"
       ></BackgroundImage>
       <HeroText theme={theme}>HELLO</HeroText>
     </Container>

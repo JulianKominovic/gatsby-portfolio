@@ -5,6 +5,7 @@ const Label = styled.label`
   font-weight: 300;
   font-size: 20px;
   display: block;
+  text-transform: capitalize;
 `;
 
 const InputText = styled.input`
@@ -27,18 +28,24 @@ const TextArea = styled.textarea`
   font-size: 20px;
 `;
 
-const Error = styled.p`
+const FormStatus = styled.p`
   display: block;
-  background-color: rgb(130, 0, 0);
-  color: red;
+  background-color: transparent;
+  border: 2px solid
+    ${(props) => {
+      if (props.state === "success") return "#9EDE73";
+      if (props.state === "fail") return "#FA1E0E";
+      if (props.state === "idle") return "#F0E3CA";
+    }};
+  color: white;
   width: max-content;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin: 0px 0 20px 0;
+  text-transform: uppercase;
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
+  }
 `;
 
-const Success = styled.p`
-  display: block;
-  background-color: rgb(0, 130, 0);
-  color: green;
-  width: max-content;
-`;
-
-export { InputText, Label, TextArea, Error, Success };
+export { InputText, Label, TextArea, FormStatus };

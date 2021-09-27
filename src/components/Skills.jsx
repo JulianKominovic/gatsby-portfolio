@@ -14,31 +14,36 @@ import {
 import { RiBook2Fill, RiTeamFill } from "react-icons/ri";
 import { TiPlus } from "react-icons/ti";
 import styled from "styled-components";
-import { HorizontalLine, VerticalLine } from "./decoration/Deco";
-import { Hexagon } from "./hexagons/Hexagons";
+import { VerticalLine } from "./decoration/Deco";
 import Node from "./hexagons/Node";
 import { H2 } from "./text/Text";
 import SectionOverlay from "./SectionOverlay";
 import ReactTooltip from "react-tooltip";
 
-const HexagonsGrid = styled.div`
+const HexagonsGrid = styled.section`
   display: grid;
   padding: 100px 160px;
-  min-height: 100vh;
+
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, max-content);
   place-items: center;
   position: relative;
+
+  @media screen and (max-width: 815px) {
+    padding: 100px 40px;
+  }
 `;
 
 const Skills = () => {
   return (
     <>
-      {TooltipData.map((data) => (
-        <ReactTooltip key={data[0]} id={data[0]}>
-          <span>{data[1]}</span>
-        </ReactTooltip>
-      ))}
+      <section id="tooltip">
+        {TooltipData.map((data) => (
+          <ReactTooltip key={data[0]} id={data[0]}>
+            <span>{data[1]}</span>
+          </ReactTooltip>
+        ))}
+      </section>
       <HexagonsGrid id="skills">
         <SectionOverlay text="04. Skills" />
         {/* LANGUAGES */}
@@ -60,7 +65,7 @@ const Skills = () => {
           col="1/2"
           row="4/5"
           direction="column"
-          id="js"
+          id="javascript"
         />
 
         {/* FRAMEWORKS */}

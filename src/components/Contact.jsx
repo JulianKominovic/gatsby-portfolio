@@ -1,37 +1,66 @@
-import { Form, Formik, Field, ErrorMessage } from "formik";
+import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { SubmitButton } from "../components/buttons/Buttons";
-import { Label, Error } from "./input/Inputs";
 import SectionOverlay from "./SectionOverlay";
 import { H1, Text } from "./text/Text";
+import { sendMail } from "services/apiMail";
+import StyledFieldFormik from "./input/StyledFieldFormik";
+import { FormStatus } from "./input/Inputs";
+import { validateFields } from "../services/validations";
 
-const ContactContainer = styled.div`
+const ContactContainer = styled.footer`
   height: 100vh;
-  padding: 160px 200px;
+  padding: 120px 200px;
   position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-direction: column;
+
+  @media screen and (max-width: 815px) {
+    padding: 120px 80px;
+  }
+  @media screen and (max-width: 450px) {
+    padding: 160px 20px 300px 20px;
+    align-items: center;
+    width: 100%;
+    margin: 100px 0;
+  }
 `;
 
-const StyledField = styled(Field)`
-  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.5);
-  padding: 4px 10px;
-  color: #fff;
-  font-weight: 300;
-  font-size: 20px;
+const TextContainer = styled.div`
+  width: 40%;
+  @media screen and (max-width: 1100px) {
+    width: 60%;
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
 `;
 
 const Contact = () => {
   const [sent, setSent] = useState("no");
+
+  const printStatus = () => {
+    if (sent === "sent") return <FormStatus state="success">{sent}</FormStatus>;
+    if (sent === "sending") return <FormStatus state="idle">{sent}</FormStatus>;
+    if (sent === "fail") return <FormStatus state="fail">{sent}</FormStatus>;
+  };
+
   return (
     <ContactContainer id="contact">
       <SectionOverlay text="05. Contact" />
-      <H1>Contact.</H1>
-      <Text>
-        Hi! Here you can get in touch with me, just leave your name, mail and
-        choose the reason. Thank you.
-      </Text>
+      <TextContainer>
+        <H1>Contact.</H1>
+        <Text>
+          Hi! Here you can get in touch with me, just leave your name, mail and
+          choose the reason. Thank you.
+        </Text>
+      </TextContainer>
       <Formik
         initialValues={{
           name: "",
@@ -40,86 +69,52 @@ const Contact = () => {
         }}
         validate={(values) => {
           let errors = {};
-          //name validation
-          if (!values.name) {
-            errors.name = "No name detected";
-          } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)) {
-            errors.name = "Must only contain letters a-z and spaces";
-          }
-          //email validation
-          if (!values.mail) {
-            errors.mail = "No mail detected";
-          } else if (
-            !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
-              values.mail
-            )
-          ) {
-            errors.mail = "Syntaxis must be name@domain.com";
-          }
-          //reason validation
-          if (!values.reason) {
-            errors.reason = "No reason detected";
-          } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.reason)) {
-            errors.reason = "Must only contain letters a-z and spaces";
-          }
+          validateFields(values, errors);
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
-          resetForm();
+          setSent("sending");
 
-          fetch("https://formsubmit.co/ajax/juliankominovic@gmail.com", {
-            method: "POST",
-            body: JSON.stringify({
-              name: values.name,
-              mail: values.mail,
-              message: values.reason,
-              _template: "table",
-              _subject: "Mail desde el portfolio!",
-            }),
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          }).then((res) => (res.status === 200 ? setSent("sending") : null));
+          sendMail({
+            name: values.name,
+            mail: values.mail,
+            reason: values.reason,
+          }).then((res) => {
+            if (res.status === 200) {
+              setSent("sent");
+              resetForm();
+            } else {
+              setSent("fail");
+            }
+          });
         }}
       >
-        {({ errors, touched }) => (
+        {({ errors, values }) => (
           <Form>
-            <Label htmlFor="name">Name (required)</Label>
-            <StyledField
+            <StyledFieldFormik
               id="name"
               name="name"
               type="text"
               placeholder="John Doe"
-            ></StyledField>
-            <ErrorMessage
-              name="name"
-              component={() => <Error>{errors.name}</Error>}
-            ></ErrorMessage>
-            <Label htmlFor="mail">Email (required)</Label>
-            <StyledField
+              errors={errors}
+            />
+            <StyledFieldFormik
               id="mail"
               name="mail"
-              type="email"
-              placeholder="johndoe@xyz.com"
-            ></StyledField>
-            <ErrorMessage
-              name="mail"
-              component={() => <Error>{errors.mail}</Error>}
-            ></ErrorMessage>
+              type="text"
+              placeholder="mail@xyz.com"
+              errors={errors}
+            />
 
-            <Label htmlFor="reason">Reason (required)</Label>
-            <StyledField
+            <StyledFieldFormik
               id="reason"
               name="reason"
-              as="textarea"
-              placeholder="I'm writing this message because..."
-            ></StyledField>
-            <ErrorMessage
-              name="reason"
-              component={() => <Error>{errors.reason}</Error>}
-            ></ErrorMessage>
+              type="text"
+              placeholder="Message"
+              errors={errors}
+            />
             <SubmitButton type="submit">Submit</SubmitButton>
+            {printStatus()}
           </Form>
         )}
       </Formik>

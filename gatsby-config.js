@@ -16,6 +16,7 @@ module.exports = {
       options: {
         components: path.join(__dirname, "src", "components"),
         context: path.join(__dirname, "src", "context"),
+        services: path.join(__dirname, "src", "services"),
       },
     },
   ],

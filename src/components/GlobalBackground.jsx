@@ -5,7 +5,7 @@ import { BackgroundImage, Background } from "./decoration/Deco";
 const GlobalBackground = () => {
   const theme = useContext(ThemeContext);
   return (
-    <Background theme={theme} zIndex="-1">
+    <Background theme={theme} zIndex="-1" id="background">
       <BackgroundImage src="/img/ellipsis1.svg"></BackgroundImage>
       <BackgroundImage
         top="30%"

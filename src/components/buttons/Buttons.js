@@ -16,8 +16,8 @@ const SubmitButton = styled.button`
   width: 100%;
   padding: 10px;
   font-weight: 600;
-  background-color: rgb(0, 0, 130);
-  color: rgb(0, 0, 255);
+  background-color: #2c2752;
+  color: #fff;
 `;
 
 export { NormalButton, SubmitButton };
